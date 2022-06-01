@@ -1,6 +1,7 @@
 package pl.sdacademy.unit.test.advance.exercises.parametrized.csvsource;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,4 +25,15 @@ class PalindromeCheckerTest {
         assertThat(result).isEqualTo(expectedResult); //assertJ
     }
 
+    @ParameterizedTest
+    @CsvFileSource(
+            resources = "/palindrome.csv",
+            delimiter = '|')
+    void shouldVerifyIfStringIsPalindromeFileSource(String input, boolean expectedResult){
+        //when
+        boolean result = PalindromeChecker.isPalindrome(input);
+        //then
+        assertEquals(expectedResult, result); //junit
+        assertThat(result).isEqualTo(expectedResult); //assertJ
+    }
 }
